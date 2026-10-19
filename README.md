@@ -8,6 +8,10 @@ Repository: **NigeriaG2P_KMS_Analytics_Ver01** · Delivered by **Sathvick Infote
 
 ## Download editable FigCraft / Figma screens
 
+**[Download open-source FigCraft](https://getartcraft.com/apps/figcraft)** · [Official source code and build instructions](https://github.com/storytold/figcraft) · [Upstream releases](https://github.com/storytold/figcraft/releases)
+
+Choose the FigCraft download matching your operating system using the official site. If no suitable binary is offered, follow the upstream source-build instructions. FigCraft is a separate design application; Docker and this deployment kit are not needed to open the design files. The design package was produced with FigCraft CLI 0.7.0; retain a copy of the original files when opening them in another version. FigCraft is an independent open-source project; consult its upstream licence and documentation. It is not the Figma service.
+
 **[Download the complete UX/UI design ZIP](https://github.com/ssathvick/NigeriaG2P_KMS_Analytics_Ver01/releases/download/v1.0.0-rc1/NigeriaG2P-UX-UI-Design-Package-v1.zip)** · [Release downloads and checksums](https://github.com/ssathvick/NigeriaG2P_KMS_Analytics_Ver01/releases/tag/v1.0.0-rc1)
 
 The ZIP contains **240 task/state screens across 26 application areas**, an editable master and 26 module files in both `.figcraft` and exported `.fig` formats, screen previews, an offline clickable HTML companion, and CSV screen/interaction registers. The master has 27 prototype flow starting points. KMS has 21 screens and operational/knowledge analytics has 11; the wider application areas provide cross-application UX context and proposed reference designs.
