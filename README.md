@@ -6,6 +6,22 @@ Deploy a configurable UX launcher, protected knowledge management and aggregate 
 
 Repository: **NigeriaG2P_KMS_Analytics_Ver01** · Delivered by **Sathvick Infotech Private Limited**.
 
+## Download editable FigCraft / Figma screens
+
+**[Download the complete UX/UI design ZIP](https://github.com/ssathvick/NigeriaG2P_KMS_Analytics_Ver01/releases/download/v1.0.0-rc1/NigeriaG2P-UX-UI-Design-Package-v1.zip)** · [Release downloads and checksums](https://github.com/ssathvick/NigeriaG2P_KMS_Analytics_Ver01/releases/tag/v1.0.0-rc1)
+
+The ZIP contains **240 task/state screens across 26 application areas**, an editable master and 26 module files in both `.figcraft` and exported `.fig` formats, screen previews, an offline clickable HTML companion, and CSV screen/interaction registers. The master has 27 prototype flow starting points. KMS has 21 screens and operational/knowledge analytics has 11; the wider application areas provide cross-application UX context and proposed reference designs.
+
+1. Download and extract the design ZIP. Open its included `README.md` first.
+2. **FigCraft:** open `designs/NigeriaG2P-Master-UX-UI-Prototype.figcraft`. Use Present/Play and choose **00 · NigeriaG2P service map**. Select an application or use the journey index to reach the named states.
+3. **Figma:** import `designs/NigeriaG2P-Master-UX-UI-Prototype.fig` through Figma's file browser. Check fonts, editable layers, components, the Prototype panel, flow starts and navigation after import. Use `NG2P-KMS-Knowledge-management.fig` or `NG2P-ANL-Operational-and-knowledge-analytics.fig` for smaller module reviews. Standalone module files use local navigation; cross-application transitions are in the master.
+4. **Browser preview:** open the extracted `Prototype-Preview.html`, keeping the package folders together. This companion is for reviewing click navigation; it is not the editable Figma document.
+5. Use `handover/Screen-Register.csv` and `Interaction-Register.csv` to reconcile screen IDs, roles and action destinations. Screen names follow `NG2P-{MODULE}-{###} / {Task} / {Viewport} / {State}`; D1440 denotes desktop and M390 mobile.
+
+**Compatibility and scope:** the `.fig` files are FigCraft-generated exports, not renamed images. Structural reimport and prototype destination checks passed in FigCraft; **Figma application import and playback have not been independently verified**, and FigCraft's exporter is experimental. Prototypes illustrate navigation and state transitions; form input, API calls, approval enforcement and payments are not executable backend operations. These designs are a source-led baseline with proposed reference screens, not a verified exhaustive inventory of every installed OpenG2P interface. Downloading or deploying this repository does not implement every screen in that design ZIP.
+
+See [the full design handover guide](docs/DESIGN-HANDOVER.md) for application coverage, example journeys, verification and acceptance work.
+
 ## Choose your installation
 
 | Route | What to download | Internet requirement |
