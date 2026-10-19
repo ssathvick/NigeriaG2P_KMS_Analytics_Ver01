@@ -1,0 +1,14 @@
+image:
+  repository: sathvick/openg2p-experience
+  tag: 1.0.0-rc1
+  pullPolicy: IfNotPresent
+imagePullSecrets: []
+existingSecret: sathvick-experience-secret
+storage:
+  size: 1Gi
+  className: ""
+# Set using --set-file deploymentConfig=config/deployment.json
+deploymentConfig: ""
+certificates: {}
+service:
+  port: 18110

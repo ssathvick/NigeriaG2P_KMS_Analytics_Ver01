@@ -1,0 +1,185 @@
+{
+  "prefix": "/experience",
+  "public_base_url": "http://127.0.0.1:18110/experience",
+  "brand": {
+    "name": "Client OpenG2P Experience",
+    "tagline": "Find your task. Follow approved guidance."
+  },
+  "allowed_origins": [],
+  "reference_hosts": [
+    "docs.openg2p.org",
+    "github.com"
+  ],
+  "knowledge_roles": {
+    "edit": [
+      "knowledge-editor",
+      "knowledge-reviewer",
+      "knowledge-publisher"
+    ],
+    "review": [
+      "knowledge-reviewer"
+    ],
+    "publish": [
+      "knowledge-publisher"
+    ]
+  },
+  "personas": [
+    {
+      "id": "citizen",
+      "name": "Citizen / assisted applicant",
+      "lead": "Register and follow your applications."
+    },
+    {
+      "id": "officer",
+      "name": "Registration officer",
+      "lead": "Register households and correct returned details."
+    },
+    {
+      "id": "verifier",
+      "name": "Verification officer",
+      "lead": "Check records and review assigned tasks."
+    },
+    {
+      "id": "supervisor",
+      "name": "Programme supervisor",
+      "lead": "Oversee programmes and operational exceptions."
+    },
+    {
+      "id": "all",
+      "name": "All services",
+      "lead": "Find specialist services and administration."
+    }
+  ],
+  "services": [
+    {
+      "id": "intake",
+      "title": "Household registration",
+      "description": "Create and correct a household registration.",
+      "url": "https://registration.example.invalid/",
+      "personas": [
+        "citizen",
+        "officer"
+      ],
+      "enabled": false
+    },
+    {
+      "id": "register",
+      "title": "Social registry",
+      "description": "Find records and follow registry intake.",
+      "url": "https://register.example.invalid/",
+      "personas": [
+        "officer",
+        "verifier"
+      ],
+      "enabled": false
+    },
+    {
+      "id": "registry",
+      "title": "Registry administration",
+      "description": "Maintain household membership and registry records.",
+      "url": "https://registry.example.invalid/web",
+      "personas": [
+        "officer",
+        "verifier",
+        "supervisor"
+      ],
+      "enabled": false
+    },
+    {
+      "id": "beneficiary",
+      "title": "Beneficiary portal",
+      "description": "Apply to programmes and follow application status.",
+      "url": "https://beneficiary.example.invalid/selfservice",
+      "personas": [
+        "citizen"
+      ],
+      "enabled": false
+    },
+    {
+      "id": "pbms",
+      "title": "Programme management",
+      "description": "Manage enrollment, benefits and disbursements.",
+      "url": "https://pbms.example.invalid/web",
+      "personas": [
+        "supervisor"
+      ],
+      "enabled": false
+    },
+    {
+      "id": "awe",
+      "title": "Approval workflows",
+      "description": "Review assigned tasks and evidence.",
+      "url": "https://awe.example.invalid/",
+      "personas": [
+        "verifier",
+        "supervisor"
+      ],
+      "enabled": false
+    },
+    {
+      "id": "knowledge",
+      "title": "Knowledge library",
+      "description": "Read help for services and workflow stages.",
+      "url": "/experience/knowledge",
+      "personas": [
+        "citizen",
+        "officer",
+        "verifier",
+        "supervisor"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "analytics",
+      "title": "Analytics",
+      "description": "Knowledge governance and configured aggregate operational metrics.",
+      "url": "/experience/analytics",
+      "personas": [
+        "supervisor"
+      ],
+      "enabled": true
+    }
+  ],
+  "screen_mappings": [],
+  "seed_mode": "draft",
+  "auth": {
+    "mode": "local",
+    "issuer": "",
+    "client_id": "",
+    "roles_claim": "realm_access.roles",
+    "claim_to_roles": {}
+  },
+  "analytics": {
+    "view_roles": [
+      "analytics-viewer",
+      "analytics-exporter"
+    ],
+    "export_roles": [
+      "analytics-exporter"
+    ],
+    "sources": [],
+    "refresh_seconds": 900,
+    "stale_seconds": 1800
+  },
+  "audience_roles": {
+    "all": [
+      "knowledge-reader",
+      "knowledge-editor",
+      "knowledge-reviewer",
+      "knowledge-publisher",
+      "registration-officer",
+      "verification-officer",
+      "programme-supervisor"
+    ],
+    "officer": [
+      "registration-officer"
+    ],
+    "verifier": [
+      "verification-officer"
+    ],
+    "supervisor": [
+      "programme-supervisor"
+    ],
+    "citizen": []
+  }
+}

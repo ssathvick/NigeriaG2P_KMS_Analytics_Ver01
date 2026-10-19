@@ -1,0 +1,13 @@
+Capability,Anonymous,Knowledge editor,Knowledge reviewer,Knowledge publisher,Analytics viewer,Analytics exporter
+Read public published guidance,Yes,Yes,Yes,Yes,Yes,Yes
+Read staff guidance,No,All managed knowledge,All managed knowledge,All managed knowledge,Only with mapped audience role,Only with mapped audience role
+Select task persona,Yes,Yes,Yes,Yes,Yes,Yes
+Create or edit draft,No,Yes,Yes,Yes,No,No
+Review own draft,No,No,No,No,No,No
+Review another author draft,No,No,Yes,No,No,No
+Publish reviewed guidance,No,No,No,Yes,No,No
+Archive or restore,No,No,No,Yes,No,No
+View editorial history,No,Yes,Yes,Yes,No,No
+View analytics,No,No,No,Only if also analytics-viewer,Yes,Only if also analytics-viewer
+Export aggregates,No,No,No,Only if also analytics-exporter,No,Yes
+Grant OpenG2P permissions,No,No,No,No,No,No

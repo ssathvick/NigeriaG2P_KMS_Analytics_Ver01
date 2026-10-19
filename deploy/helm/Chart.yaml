@@ -1,0 +1,6 @@
+apiVersion: v2
+name: sathvick-experience
+description: Single-instance UX launcher, KMS and aggregate analytics companion for OpenG2P
+type: application
+version: 1.0.0-rc1
+appVersion: 1.0.0-rc1

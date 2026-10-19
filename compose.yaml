@@ -1,0 +1,85 @@
+name: sathvick-experience
+services:
+  experience:
+    image: sathvick/openg2p-experience:1.0.0-rc1
+    build: .
+    ports: ["127.0.0.1:18110:18110"]
+    env_file:
+      - {path: .env, required: false}
+    environment:
+      EXPERIENCE_CONFIG: /app/config/deployment.json
+      EXPERIENCE_DATABASE: /app/data/knowledge.sqlite
+    volumes:
+      - experience-data:/app/data
+      - ./config:/app/config:ro
+    read_only: true
+    tmpfs: ["/tmp:size=67108864,mode=1777"]
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "tools/healthcheck.py"]
+      interval: 15s
+      timeout: 8s
+      start_period: 30s
+      retries: 6
+    logging:
+      driver: json-file
+      options: {max-size: "10m", max-file: "3"}
+  collector:
+    image: sathvick/openg2p-experience:1.0.0-rc1
+    command: ["python", "collector.py", "--loop"]
+    env_file:
+      - {path: .env, required: false}
+      - {path: config/connectors.env, required: false}
+    environment:
+      EXPERIENCE_CONFIG: /app/config/deployment.json
+      EXPERIENCE_DATABASE: /app/data/knowledge.sqlite
+    volumes:
+      - experience-data:/app/data
+      - ./config:/app/config:ro
+    read_only: true
+    tmpfs: [/tmp]
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    depends_on:
+      experience: {condition: service_healthy}
+    restart: unless-stopped
+    stop_grace_period: 30s
+    logging:
+      driver: json-file
+      options: {max-size: "10m", max-file: "3"}
+  setup:
+    image: sathvick/openg2p-experience:1.0.0-rc1
+    profiles: [tools]
+    entrypoint: ["python", "tools/configure.py", "--root", "/kit"]
+    user: "${SETUP_UID:-0}:${SETUP_GID:-0}"
+    volumes: [".:/kit"]
+  backup:
+    image: sathvick/openg2p-experience:1.0.0-rc1
+    profiles: [tools]
+    entrypoint: ["python", "tools/backup.py"]
+    user: "0:0"
+    environment:
+      EXPERIENCE_DATABASE: /app/data/knowledge.sqlite
+    volumes:
+      # SQLite read-only connections can need writable shared-memory lock files.
+      # backup.py opens the database itself with mode=ro and uses the online API.
+      - experience-data:/app/data
+      - ./backups:/app/backups
+  restore:
+    image: sathvick/openg2p-experience:1.0.0-rc1
+    profiles: [tools]
+    entrypoint: ["python", "tools/restore.py"]
+    user: "10001:10001"
+    environment:
+      EXPERIENCE_DATABASE: /app/data/knowledge.sqlite
+    volumes:
+      - experience-data:/app/data
+      - ./backups:/restore:ro
+    read_only: true
+    tmpfs: [/tmp]
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+volumes:
+  experience-data:

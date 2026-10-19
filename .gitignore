@@ -1,0 +1,16 @@
+.env
+config/connectors.env
+config/kubernetes-secret.json
+data/
+backups/
+offline/
+__pycache__/
+*.sqlite*
+
+node_modules/
+.venv/
+*.zip
+*.tar
+*.pem
+*.key
+*.pyo

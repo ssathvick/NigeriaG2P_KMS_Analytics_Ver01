@@ -1,0 +1,35 @@
+{
+  "release": "1.0.0-rc1",
+  "date": "2026-10-19",
+  "status": "release candidate; client staging acceptance required",
+  "host": "Windows / WSL2 Ubuntu-22.04",
+  "docker_engine": "29.9.1",
+  "docker_compose_runtime": "5.6.0",
+  "image_manifest_digest": "sha256:8f951f1a1cdc03adfef95cbc3c724b1033cda4e38111c968e643757fa244b300",
+  "checks": {
+    "application_tests_windows": {
+      "passed": 31
+    },
+    "application_tests_linux_container": {
+      "passed": 31
+    },
+    "context_mapping_tests": "passed: configured host / explicit stage / native preset",
+    "compose_2_24_7_configuration": "passed",
+    "helm_3_19_lint_and_template": "passed",
+    "container_build_startup_health": "passed, including final image",
+    "http_publication_permissions_feedback_csv": "passed with separate editor/reviewer/publisher",
+    "postgres_tls_verify_full": "passed against isolated fixtures: Registry 1.2 / PBMS 3 / AWE / Bridge 3 / approved aggregate view",
+    "https_aggregate_tls": "passed; redirects and unexpected fields rejected",
+    "sqlite_online_backup_and_stopped_restore": "passed; post-backup marker removed, accounts preserved",
+    "offline_image_export_checksum_import": "passed",
+    "image_secrets_exclusion": "passed: no .env or connectors.env"
+  },
+  "not_verified": [
+    "Actual client OpenG2P schemas and native template embeddings",
+    "Actual client IdP (OIDC callback tests use mocks)",
+    "Client ingress, DNS, TLS termination and Kubernetes rollout",
+    "Production capacity, security audit, accessibility certification or UAT"
+  ],
+  "scope": "Companion UX launcher, KMS and aggregate analytics; native OpenG2P form redesigns are not delivered by this kit.",
+  "repository_revision_note": "Installation documentation expanded for Windows/Linux/macOS; checksum scripts support macOS shasum. Shell syntax verified; no macOS runtime validation."
+}
