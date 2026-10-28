@@ -1,0 +1,22 @@
+--- a/registration_app.py
++++ b/registration_app.py
+@@ -99,6 +99,10 @@
+  client=CONFIG['clients'][mode];params={'client_id':client['id'],'response_type':'code','scope':'openid profile email','redirect_uri':BASE+PREFIX+'/callback','state':state,'nonce':nonce,'code_challenge':base64.urlsafe_b64encode(hashlib.sha256(verifier.encode()).digest()).decode().rstrip('='),'code_challenge_method':'S256'}
+  endpoint='registrations' if request.args.get('signup')=='1' and mode=='beneficiary' else 'auth'
+  return redirect(issuer(mode)+'/protocol/openid-connect/'+endpoint+'?'+urlencode(params))
++def default_login_destination(mode,roles):
++ if mode!='staff':return PREFIX+'/'
++ if 'iqs-intake-reviewer' in roles:return PREFIX+'/staff'
++ return PREFIX+'/workspace'
+ @app.get(PREFIX+'/callback')
+ def callback():
+  flow=g.session.pop('login',{})
+@@ -116,7 +120,7 @@
+  if flow.get('grievances'):return redirect(PREFIX+'/phase1/grievances')
+  if flow.get('phase1'):return redirect(PREFIX+'/phase1')
+  if flow.get('ai'):return redirect(PREFIX+'/ai?'+urlencode({'module':flow.get('ai_module','platform'),'stage':flow.get('ai_stage','')}))
+- return redirect(PREFIX+'/simulation' if flow.get('simulation') else PREFIX+'/analytics' if flow.get('analytics') else PREFIX+'/knowledge/admin' if flow.get('knowledge') else PREFIX+'/geography' if flow.get('geography') else PREFIX+'/workspace' if flow.get('workspace') else (PREFIX+'/staff' if flow['mode']=='staff' else PREFIX+'/'))
++ return redirect(PREFIX+'/simulation' if flow.get('simulation') else PREFIX+'/analytics' if flow.get('analytics') else PREFIX+'/knowledge/admin' if flow.get('knowledge') else PREFIX+'/geography' if flow.get('geography') else PREFIX+'/workspace' if flow.get('workspace') else default_login_destination(flow['mode'],g.session['user']['roles']))
+ @app.post(PREFIX+'/logout')
+ def logout():g.session={};return redirect(PREFIX+'/')
+ @app.get(PREFIX+'/')
