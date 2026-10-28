@@ -1,21 +1,19 @@
-# Demo portal accounts and role access
+# Demo portal and service accounts
 
-The 28 October 2026 local Nigeria demo deployment has separate Keycloak identities for registration officer, verification officer, programme supervisor, citizen and a reserved administrator account. The accounts are environment-specific and are not automatically installed by this repository or the release kit. Passwords and credentials are distributed separately and must not be committed here.
+The Nigeria demonstration deployment has separate test identities. Accounts are environment-specific and are not created automatically by this repository or release kit. Credentials are held separately; never commit passwords here. These accounts include privileged service administration and are for the synthetic-data demonstration environment.
 
-| Demo identity | Identity realm | Workspace access verified |
-| --- | --- | --- |
-| ooru.demo.registration | staff | registration officer |
-| ooru.demo.verification | staff | verification officer |
-| ooru.demo.supervisor | staff | programme supervisor |
-| ooru.demo.citizen | beneficiary | citizen |
-| ooru.demo.admin | staff | no administrator permissions assigned; configuration role and scope require confirmation |
+## Staff Portal and Staff Access Administration
 
-For the local deployment, staff can initiate sign-in using `https://nigeriag2p.com/registration/login?mode=staff&workspace=1` and the citizen can use `https://nigeriag2p.com/registration/login?mode=beneficiary&workspace=1`. Availability depends on the lab and network. The ordinary staff login currently redirects to a reviewer-only page and may return 403 for persona-only users; use the workspace sign-in link above. The administrator account authenticates but has no assigned workspace or configuration rights.
+- Staff Portal: `ooru.demo.staffportal` at https://staff-portal.nigeriag2p.com — live sign-in and landing screen verified on 28 October 2026.
+- Staff Access Administration: `ooru.demo.keycloak` at https://iam-staff-ui.nigeriag2p.com — live sign-in and Applications screen verified on 28 October 2026. The account has the IAM staff UI application administrator role and staff-realm administration. This is distinct from the Keycloak master administration console, which is not publicly available.
+- The separate `ooru.demo.admin` persona account has no configuration-admin workspace assigned.
 
-These identities and roles apply to the demonstration registration workspace, not automatically to native OpenG2P applications or this independent experience kit. Existing lab workspace data is synthetic. Before use in a client environment, agree on the identity provider, permissions, data scope, account provisioning and verification. Do not use a shared demo password for production.
+The deployment's staff realm now contains the `iam-staff-ui` permission client and `IAM_ADMIN` client role, mapped to the staff-administration test account. The IAM API maps this role to the existing IAM application's permissions. This deployment-specific identity change is not applied by the kit installer and must be reproduced and validated independently in any other environment.
 
-## Separate service accounts
+## Verified access
 
-The local demo deployment additionally has distinct identities for PBMS, Odoo Social Registry, beneficiary programme administration, Modern Social Registry, staff portal, approval workflows, master data, partner management, consent management, ODK, Superset, Kafka, Keycloak staff-realm administration and MinIO. The three Odoo accounts inherited their respective existing lab administrator groups and authenticated via Odoo XML-RPC; the MinIO local account has the consoleAdmin policy and its administrative API authentication was verified. These accounts are privileged demo accounts, not production role definitions.
+On 28 October 2026, public Odoo authentication succeeded for PBMS, Odoo Social Registry and beneficiary programme administration. Browser sign-in reached the service screens for Modern Social Registry, Staff Portal, approval workflows, master data, partner management, consent management, ODK Central, Superset and beneficiary self-service. Registration officer, verification officer, supervisor and citizen workspace identities were separately verified. These are sign-in and landing-screen checks; they do not certify every operation or authorization boundary.
 
-The Modern Registry, approvals, master data, partner, consent, analytics and Kafka identities received their existing service-specific Keycloak client role mappings. The ODK identity has an ODK administrator record. Staff Portal and ODK SSO application access, all other SSO service logins, and the beneficiary native portal have not yet been individually verified. The Keycloak account has staff-realm administration only, not master-realm administration. The original configuration-admin persona remains unassigned. Credentials and the detailed account inventory are held separately; do not commit them here.
+The Kafka identity authenticates to Keycloak but its public console URL returns 404. The MinIO identity authenticates to its administrative API locally but its public console URL returns 404. The Keycloak master administration console is not publicly available. The ordinary registration staff login may lead persona-only accounts to a reviewer-only 403; use `https://nigeriag2p.com/registration/login?mode=staff&workspace=1` for their workspaces. Availability depends on the lab and network.
+
+The three Odoo service accounts inherit their existing lab administrator groups; MinIO has the consoleAdmin policy. Service roles are not automatically native OpenG2P permissions in other environments. Use synthetic records only, and establish appropriate role scope and separate credentials before any production use.
