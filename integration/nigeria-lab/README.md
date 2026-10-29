@@ -12,7 +12,7 @@ This change addresses the post-login redirect only; it does not claim to fix a s
 
 On the Nigeria demo, household details showed HTTP 400 because the installed registry widget expects each geography level inside `widget-data-source.params.level_id`, while the lab metadata stored it only at the top level. The options also lacked value and label mappings. `fix_geo_widget_params.py` repairs only matching master-data geography widgets in `g2p_register_sections`, saves a restricted metadata backup, and applies optimistic checks in one transaction. It requires `labdb.py`, Kubernetes and authorised lab database access; review and test against a backup before running in any other environment. The script is idempotent. No household records are changed.
 
-On 28 October 2026 this updated four widgets in the household and individual location sections. A synthetic household detail then loaded without the initial 400; the State selector displayed names and selecting Lagos loaded Ikeja and Surulere. The test selection was cancelled. The demo LGA catalogue remains limited; this is not a complete Nigeria geography dataset. The lab's localization procedure must also retain `params.level_id`, `valueKey=level_value_id` and `labelKey=level_value_mnemonic` when it rebuilds widget metadata.
+On 28 October 2026 this updated four widgets in the household and individual location sections. A synthetic household detail then loaded without the initial 400; the State selector displayed names and selecting Lagos loaded Ikeja and Surulere. The test selection was cancelled. On 29 October the demo master-data catalogue was subsequently expanded to 774 LGAs and area councils; see [the lab update](updates-2026-10-29/README.md) for the source snapshot and validation limits. The lab's localization procedure must also retain `params.level_id`, `valueKey=level_value_id` and `labelKey=level_value_mnemonic` when it rebuilds widget metadata.
 
 ## Modern Social Registry UX and mobile changes
 
@@ -21,3 +21,7 @@ On 28 October 2026 this updated four widgets in the household and individual loc
 `repair-household-housing-tab.py` repairs the lab's orphaned Housing & Services section mappings. It uses `labdb.py`, kubectl, psql, and the Nigeria lab's database and specific register ID; review the target identifiers, back up metadata and test in staging before applying elsewhere. It only updates mappings and does not change household records. On the demo, rerunning the script made no additional updates, and the tab displayed the housing and assets sections.
 
 Validation on the demonstration registry used browser viewport emulation at 320 and 390 pixels, including search, filters, pagination and member-table scrolling. Physical-device and full accessibility testing remain outstanding. This integration snapshot does not update the separately published design ZIP or offline image.
+
+## Recent consent, partner and geography updates
+
+See [the 29 October lab integration snapshot](updates-2026-10-29/README.md) for the separately deployed beneficiary consent service, partner session handling and master-data import. These changes are not automatically installed by this kit.
